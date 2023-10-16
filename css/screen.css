@@ -2,16 +2,32 @@
 #FONTS
 \*------------------------------------*/
 
+@font-face {
+    font-family: "WorkSans";
+    src: url("../fonts/WorkSans-Regular.ttf") format("truetype");
+    font-weight: normal;
+    font-style: normal;
+}
+
 /*------------------------------------*\
 #Variables
 \*------------------------------------*/
 
 :root {
     /* colors */
+    --color-light: hsl(208, 100%, 90%);
+    --color-dark: hsl(208, 71%, 20%);
+
+    --color-front: var(--color-dark);
+    --color-back: var(--color-light);
+
+    /* sizes */
+    --global-logo-size: 1.375rem;
 
     /* opacity */
 
     /* transitions */
+
 }
 
 /*------------------------------------*\
@@ -25,18 +41,31 @@
 */
 
 html {
+    background-color: var(--color-back);
+    color: var(--color-front);
     font-size: 100%;
     line-height: 1.5;
-    font-family: Helvetica, arial, sans-serif;
+    font-family: "WorkSans", Helvetica, arial, sans-serif;
     box-sizing: border-box;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+
+    &.is-night {
+        --color-front: var(--color-light);
+        --color-back: var(--color-dark);
+    }
+}
+
+
+body {
+    margin: 0;
 }
 
 *,
 *:before,
 *:after {
     box-sizing: inherit;
+    
 }
 
 /*
@@ -241,7 +270,13 @@ input::placeholder {
     Website main logo
 */
 
-.c-logo {}
+.c-logo {
+    font-size: 1rem;
+    display: flex;
+    justify-content: center;
+    align-items: start;
+    gap: 8px;
+}
 
 /*
     Component: Sun
@@ -249,7 +284,11 @@ input::placeholder {
     The sun
 */
 
-.c-sun {}
+.c-sun {
+    width: var(--global-logo-size);
+    height: var(--global-logo-size);
+    fill: var(--color-front);
+}
 
 .c-logo .c-sun {}
 
@@ -259,11 +298,78 @@ input::placeholder {
     Main app wrapper
 */
 
+.c-app {
+    width: 400px;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: start;
+    margin: 0 auto;
+}
+
+.c-app__summary {
+    font-size: 1.75rem;
+    line-height: 2.2rem;
+}
+
+
 /*
     Component: Horizon
     ---
     Horizon with sun visualisation
 */
+
+.c-horizon {
+    font-size: .75rem;
+    width: 100%;
+    margin-bottom: 2.125rem;
+    margin-top: auto;
+}
+
+.c-horizon__line {
+    border-top: var(--color-dark) 1px solid;
+    display: flex;
+    justify-content: space-between;
+}
+
+.c-horizon__time {
+    padding-top: .5rem;
+}
+
+.c-horizon__sun {
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 40px;
+    transform: translateY(22px);
+
+    &::before {
+        content: attr(data-time);
+        display: block;
+        margin-bottom: .5rem;
+        text-align: center;
+    }
+}
+
+.c-horizon__sky-wrapper {
+    position: relative;
+    height: 200px;
+    overflow: hidden;
+    padding-top: 22px;
+    padding-right: 40px;
+    
+    &::before {
+        content: "";
+    }
+}
+
+.c-horizon__sky {
+    position: relative;
+    height: 100%;
+}
 
 /*------------------------------------*\
 #UTILITIES
@@ -273,6 +379,10 @@ input::placeholder {
     Utilities: Mute
     Mute with opacity
 */
+
+.u-muted {
+    opacity: 0.6;
+}
 
 /*------------------------------------*\
 #STATES
