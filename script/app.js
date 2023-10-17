@@ -18,8 +18,7 @@ let updateSun = function(percentage) {
 	// We draaien de graden om zodat de zon ondergaat ipv opkomt.
 	const sun = document.querySelector('.js-sun');
 	sun.style.left = `${percentage}%`;
-	sun.style.bottom = `${percentage*2}%`;
-	// sun.style.transform = `rotate(${(percentage * 1.8) - 90}deg)`;
+	sun.style.bottom = `${percentage}%`;
 
 	const now = new Date();
 	const currentHour = now.getHours();
